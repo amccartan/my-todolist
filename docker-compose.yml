@@ -1,0 +1,17 @@
+services:
+  db:
+    image: mysql:8
+    container_name: database
+    stop_grace_period: 0s
+    ports:
+      - 8976:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=docker
+      - MYSQL_DATABASE=docker
+      - MYSQL_USER=docker
+      - MYSQL_PASSWORD=docker
+      
+volumes:
+  mysql-data:
