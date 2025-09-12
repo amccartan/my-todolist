@@ -32,3 +32,5 @@ const handler = (req: NextRequest) =>
   });
 
 export { handler as GET, handler as POST };
+//GET receives data from a server (read-only)
+//POST sends data to a server to create or update a resource

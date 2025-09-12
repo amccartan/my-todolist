@@ -9,12 +9,14 @@ import { useToDoList } from './useToDoList';
 export default function MyToDoApp() {
 
   const data = api.helloWorld.helloWorld.useQuery();
+  const data2 = api.helloSomeone.helloSomeone.useQuery({name: "amy"});
 
   const listControl = useToDoList();
 
   return (
     <div>
     <h2>trpc client-rendered content: {data.data?.message}</h2>
+    <h2>{data2.data?.greeting}</h2> {/*data2 is the result of useQuery, and it contains the property 'data'*/}
     <ToDoContext.Provider value={listControl}>
       <div>
         <h1>Amy's To-Do List!</h1>
