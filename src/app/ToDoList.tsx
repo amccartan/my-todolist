@@ -27,9 +27,11 @@ type ToDoListProps = {
 
 export default function ToDoList({ list }: ToDoListProps) {
   
-  const [newToDoItem, setNewToDoItem] = useState("");
-  const listControl = useContext(ToDoContext);
+  const [newToDoItem, setNewToDoItem] = useState(""); //local state for new todo input
+  const listControl = useContext(ToDoContext); //access global todo list controls from context
 
+
+  //trpc mutation for creating a new todo in the database
   const createToDoItemMutation = api.createToDoItem.createToDoItem.useMutation();
 
 
@@ -39,10 +41,13 @@ export default function ToDoList({ list }: ToDoListProps) {
     //! checks whether the trimmed name is empty
 
     createToDoItemMutation.mutate(
-      { text : newToDoItem },
+      { text : newToDoItem }, //variable expected by backend
       {
         onSuccess: (data) => {
-          listControl.addItem(data.toDoItem); //add to local UI
+          //database then responds with {toDoItem} 
+          // (this is because createToDoItem in toDoItem.ts returns a toDoItem...
+          // ... this '{ toDoItem: { id, text, done } }' is then used below to update local state/context)
+          listControl.addItem(data.toDoItem); //update local state/context
           setNewToDoItem(""); // clear input after success
         },
       } 

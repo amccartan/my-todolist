@@ -3,6 +3,7 @@ import { createTRPCRouter, publicProcedure } from "../trpc";
 import { db } from "../../db";
 
 export const toDoItemRouter = createTRPCRouter({
+
   createToDoItem: publicProcedure
     .input(
       z.object({
@@ -20,7 +21,8 @@ export const toDoItemRouter = createTRPCRouter({
       };
     }),
 
-    
+
+
     toggleToDoItem: publicProcedure
     .input(z.object({ id: z.number(), done: z.boolean() }))
     .mutation(async ({ input }) => {
@@ -31,6 +33,7 @@ export const toDoItemRouter = createTRPCRouter({
       return { toDoItem: updated };
     }),
 
+    
 
     deleteToDoItem: publicProcedure
     .input(z.object({ id: z.number() }))
