@@ -1,8 +1,9 @@
 "use client";
-import * as React from 'react';
+
 import { ToDoListItem } from './ToDoListItem';
-import {type ToDoItem} from './useToDoList';
+import {useToDoList, type ToDoItem} from './useToDoList';
 import { ToDoContext } from './ToDoListContext';
+import { useState , useContext} from 'react';
 
 
 type ToDoItemCheckBox = {
@@ -24,29 +25,12 @@ type ToDoListProps = {
 };
 
 export default function ToDoList({ list }: ToDoListProps) {
-  const [newToDoItem, setNewToDoItem] = React.useState('');
-  const listControl = React.useContext(ToDoContext);
-
-    // FOR ADDING NEW LIST ITEM
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>){
-    setNewToDoItem(event.target.value);
-  }
+  
+  const listControl = useContext(ToDoContext);
 
   return(
-    <div>
-      <input
-        type="text"
-        value={newToDoItem}
-        onChange={handleChange}
-        placeholder="Type new task here..."
-      />
-      <button type="button" onClick={() => {
-        listControl.addItem(newToDoItem);
-        setNewToDoItem("");
-      }}>
-        Add New Task!
-      </button>
 
+    <div>
       <ol>
         {list.map((item, index) => (
           <div key={index}>
