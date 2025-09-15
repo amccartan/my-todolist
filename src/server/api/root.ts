@@ -2,7 +2,7 @@ import { postRouter } from "~/server/api/routers/post";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { helloWorldRouter } from "./routers/helloWorld";
 import { createUserRouter } from "./routers/createUser";
-import { createToDoItemRouter } from "./routers/createToDoItem";
+import { toDoItemRouter } from "./routers/toDoItem";
 
 
 /**
@@ -14,7 +14,10 @@ export const appRouter = createTRPCRouter({
   post: postRouter,
   helloWorld: helloWorldRouter,
   createUser: createUserRouter,
-  createToDoItem: createToDoItemRouter,
+  createToDoItem: toDoItemRouter,
+  deleteToDoItem: toDoItemRouter,
+  toggleToDoItem: toDoItemRouter,
+  toDoItem:toDoItemRouter, //needed so that 'api.toDoItem.toggleToDoItem.useMutation()' works in the useToDoList.ts file!!
 });
 
 // export type definition of API
